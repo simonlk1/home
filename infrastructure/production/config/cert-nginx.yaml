@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-nginx
+  namespace: ingress-nginx
+spec:
+  secretName: nginx-tls-secret
+  dnsNames:
+  - "*.simonlk.dk"
+  - "simonlk.dk"
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
