@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daggerlab
+  namespace: daggerlab
+  labels:
+    app: daggerlab
+spec:
+  selector:
+    matchLabels:
+      app: daggerlab
+  template:
+    metadata:
+      labels:
+        app: daggerlab
+    spec:
+      containers:
+      - name: daggerlab
+        image: node:22
+        workingDir: /app
+        command: [ "sh", "-c" ]
+        args:
+            - |
+              apk add --no-cache git && \
+              git clone https://github.com/freyjabun/daggerlab.git . && \
+              npm install && \
+              node index.js
+        ports:
+        - containerPort: 3000
+
