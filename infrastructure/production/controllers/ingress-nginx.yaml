@@ -31,8 +31,6 @@ spec:
       interval: 12h
   values:
     controller:
-      extraArgs:
-        default-ssl-certificate: "ingress-nginx/nginx-tls-secret"
       config:
         ssl-redirect: "true"
         force-ssl-redirect: "true"
