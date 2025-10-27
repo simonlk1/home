@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: daggerlab
-        image: node:22
+        image: node:25-alpine
         workingDir: /app
         command: [ "sh", "-c" ]
         args:
