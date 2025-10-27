@@ -24,6 +24,10 @@ spec:
               apk add --no-cache git && \
               git clone https://github.com/freyjabun/daggerlab.git . && \
               npm install && \
-              npm run dev
+              npm run dev -- --host 0.0.0.0
         ports:
         - containerPort: 5173
+          name: viteendpoint
+        env:
+        - name: __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
+          value: ".simonlk.dk"
