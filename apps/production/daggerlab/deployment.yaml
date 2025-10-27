@@ -24,7 +24,7 @@ spec:
               apk add --no-cache git && \
               git clone https://github.com/freyjabun/daggerlab.git . && \
               npm install && \
-              node index.js
+              npm run dev
         ports:
         - containerPort: 3000
 
