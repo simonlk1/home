@@ -14,10 +14,10 @@ spec:
         path: /
         backend:
           service:
-            name: podinfo
+            name: dagerlab
             port:
               number: 80
   tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
   - hosts:
     - simonlk.dk
-    secretName: podinfo-cert # < cert-manager will store the created certificate in this secret.
+    secretName: daggerlab-cert # < cert-manager will store the created certificate in this secret.
