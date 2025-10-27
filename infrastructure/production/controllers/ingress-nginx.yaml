@@ -34,4 +34,5 @@ spec:
       service:
         type: "LoadBalancer"
     admissionWebhooks:
-      enabled: false
+      certManager:
+        enabled: true
