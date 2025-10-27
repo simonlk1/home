@@ -31,6 +31,8 @@ spec:
       interval: 12h
   values:
     controller:
+      ingressClassResource:
+        default: true
       config:
         ssl-redirect: "true"
         force-ssl-redirect: "true"
