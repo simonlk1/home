@@ -19,5 +19,5 @@ spec:
               number: 9898
   tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
   - hosts:
-    - simonlk.dk
+    - podinfo.simonlk.dk
     secretName: podinfo-cert # < cert-manager will store the created certificate in this secret.
