@@ -26,5 +26,4 @@ spec:
               npm install && \
               npm run dev
         ports:
-        - containerPort: 3000
-
+        - containerPort: 5173
