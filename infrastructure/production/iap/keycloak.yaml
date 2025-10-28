@@ -11,7 +11,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: bitnami-keycloak
       version: 25.2.0
   interval: 10m0s
   values:
