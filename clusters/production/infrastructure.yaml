@@ -32,3 +32,21 @@ spec:
   path: ./infrastructure/production/config
   prune: true
   wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-iap
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-config
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/production/iap
+  prune: true
+  wait: true
