@@ -3,7 +3,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: bitnami-keycloak
-  namespace: flux-system
+  namespace: iap
 spec:
   interval: 10m0s
   url: oci://registry-1.docker.io/bitnamicharts/keycloak
