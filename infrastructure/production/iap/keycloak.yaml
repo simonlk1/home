@@ -10,7 +10,7 @@ spec:
       chart: keycloak
       reconcileStrategy: ChartVersion
       sourceRef:
-        kind: HelmRepository
+        kind: OCIRepository
         name: bitnami
         namespace: iap
       version: 25.2.0
