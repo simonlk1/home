@@ -2,9 +2,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: bitnami
+  name: cloudpirates-keycloak
   namespace: iap
 spec:
   interval: 10m0s
   type: oci
-  url: oci://registry-1.docker.io/bitnamicharts
+  url: oci://registry-1.docker.io/cloudpirates/keycloak

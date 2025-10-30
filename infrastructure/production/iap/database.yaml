@@ -1,0 +1,95 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: cloudnative-pg
+  namespace: iap
+spec:
+  interval: 12h
+  url: https://cloudnative-pg.github.io/charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudnative-pg
+  namespace: iap
+spec:
+  interval: 12h
+  chart:
+    spec:
+      chart: cloudnative-pg
+      version: 0.26.1
+      sourceRef:
+        kind: HelmRepository
+        name: cloudnative-pg
+        namespace: iap
+  upgrade:
+    cleanupOnFail: true
+  values:
+    crds:
+      create: true
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: keycloakdb
+  namespace: iap
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.4
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 5Gi
+    storageClass: default
+  enableSuperuserAccess: true
+  superuserSecret:
+    name: keycloak-db-credentials
+  postgresql:
+    parameters:
+      max_connections: "300"
+      shared_buffers: 512MB
+      pg_stat_statements.max: "10000"
+      pg_stat_statements.track: all
+  monitoring:
+    enablePodMonitor: true
+  # https://github.com/cloudnative-pg/cloudnative-pg/issues/2570
+  enablePDB: false
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "2Gi"
+  # backup:
+  #   retentionPolicy: 30d
+  #   barmanObjectStore:
+  #     wal:
+  #       compression: bzip2
+  #       maxParallel: 8
+  #     destinationPath: s3://postgresql/
+  #     endpointURL: http://nas.home:9000
+  #     serverName: postgres-v17
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: cloudnative-pg-secret
+  #         key: aws-access-key-id
+  #       secretAccessKey:
+  #         name: cloudnative-pg-secret
+  #         key: aws-secret-access-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloakdb # map to internal DNS keycloak.iap.svc.cluster.local
+  namespace: iap
+spec:
+  type: ClusterIP
+  externalTrafficPolicy: Local
+  ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    cnpg.io/cluster: keycloakdb
+    role: primary

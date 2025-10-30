@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - repository.yaml
+  - database.yaml
   - keycloak.yaml
