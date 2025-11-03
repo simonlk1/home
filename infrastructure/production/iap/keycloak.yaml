@@ -35,7 +35,6 @@ spec:
             env:
               TZ: Europe/Copenhagen
               KC_FEATURES: passkeys
-              KC_HOSTNAME: "https://auth.simonlk.dk"
               KC_DB: postgres
               KC_DB_URL: jdbc:postgresql://keycloakdb.iap.svc.cluster.local:5432/
               KC_DB_USERNAME: postgres
@@ -44,13 +43,6 @@ spec:
                   secretKeyRef:
                     name: keycloak-db-credentials
                     key: password
-              KC_SPI_CORS_ENABLED: "true"
-              KC_SPI_CORS_ORIGINS: "*"
-              KC_SPI_CORS_METHODS: "GET,HEAD,OPTIONS,POST,PUT,DELETE"
-              KC_SPI_CORS_HEADERS: "Authorization,Content-Type,Accept,Origin,X-Requested-With"
-              KC_SPI_CORS_EXPOSED_HEADERS: "Content-Disposition,Content-Length,Content-Type"
-              KC_SPI_CORS_ALLOW_CREDENTIALS: "true"
-              KC_SPI_CORS_MAX_AGE: "3600"
             # -- Override the command(s) for the containers
             command:
               - "/opt/keycloak/bin/kc.sh"
@@ -61,6 +53,13 @@ spec:
               - "--proxy-headers=xforwarded"
               - "--hostname=https://auth.simonlk.dk"  # Explicitly set the external hostname
               - "--spi-connections-http-client-default-disable-trust-manager=true"
+              - "--spi-cors-enabled=true"
+              - "--spi-cors-origins=*"
+              - "--spi-cors-methods=GET,HEAD,OPTIONS,POST,PUT,DELETE"
+              - "--spi-cors-headers=Authorization,Content-Type,Accept,Origin,X-Requested-With"
+              - "--spi-cors-exposed-headers=Content-Disposition,Content-Length,Content-Type"
+              - "--spi-cors-allow-credentials=true"
+              - "--spi-cors-max-age=3600"
               #- "--import-realm"
               #KC_BOOTSTRAP_ADMIN_USERNAME:
               #  valueFrom:
