@@ -54,7 +54,6 @@ metadata:
   namespace: iap
 spec:
   type: ClusterIP
-  externalTrafficPolicy: Local
   ports:
     - name: postgres
       port: 5432
