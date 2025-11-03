@@ -37,7 +37,7 @@ spec:
               KC_FEATURES: passkeys
               KC_HOSTNAME: "https://auth.simonlk.dk"
               KC_DB: postgres
-              KC_DB_URL: jdbc:postgresql://keycloakdb.iap.svc.cluster.local:5432
+              KC_DB_URL: jdbc:postgresql://keycloakdb.iap.svc.cluster.local:5432/
               KC_DB_USERNAME:
                 valueFrom:
                   secretKeyRef:
