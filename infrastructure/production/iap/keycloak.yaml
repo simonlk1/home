@@ -38,16 +38,12 @@ spec:
               KC_HOSTNAME: "https://auth.simonlk.dk"
               KC_DB: postgres
               KC_DB_URL: jdbc:postgresql://keycloakdb.iap.svc.cluster.local:5432/
-              KC_DB_USERNAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: keycloak-db-credentials
-                    key: db-username
+              KC_DB_USERNAME: postgres
               KC_DB_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: keycloak-db-credentials
-                    key: db-password
+                    key: password
               KC_SPI_CORS_ENABLED: "true"
               KC_SPI_CORS_ORIGINS: "*"
               KC_SPI_CORS_METHODS: "GET,HEAD,OPTIONS,POST,PUT,DELETE"
