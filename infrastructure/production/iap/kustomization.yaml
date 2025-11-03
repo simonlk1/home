@@ -4,5 +4,4 @@ resources:
   - namespace.yaml
   - database-repository-release.yaml
   - database-deploy.yaml
-  - repository.yaml
   - keycloak.yaml

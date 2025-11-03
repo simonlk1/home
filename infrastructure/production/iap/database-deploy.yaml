@@ -50,7 +50,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: keycloakdb # map to internal DNS keycloak.iap.svc.cluster.local
+  name: keycloakdb # map to internal DNS keycloakdb.iap.svc.cluster.local
   namespace: iap
 spec:
   type: ClusterIP
